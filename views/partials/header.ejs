@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog Site</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo"><i class="material-icons">message</i> myBlog</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <% if(!currentUser){ %>
+        <li><a href="/user">Login</a></li>
+        <li><a href="/register">Sign Up</a></li>
+        <% } else if(currentUser.isAdmin == true){ %>
+        <li><a href="/new">Create Post</a></li>
+        <li><a href=""><%= currentUser.username %></a></li>
+        <li><a href="/user/logout">Logout</a></li>
+      <% } else { %>
+        <li><a href=""><%= currentUser.username %></a></li>
+        <li><a href="/user/logout">Logout</a></li>
+      <% } %>
+      </ul>
+    </div>
+  </nav>
+
+  
+
+   <ul class="sidenav" id="mobile-demo">
+    <li><a href="sass.html">Sass</a></li>
+    <li><a href="badges.html">Components</a></li>
+    <li><a href="collapsible.html">Javascript</a></li>
+    <li><a href="mobile.html">Mobile</a></li>
+  </ul>
+        
+

@@ -1,0 +1,128 @@
+<% include ./partials/header%>
+
+<div class="main-container">
+<div class="container">
+
+<%  blogs = blogs.reverse();%>
+
+<% if(blogs.length >= 5){ %>
+
+<div class="row" style="padding: 1px;">
+  
+  <div class="col s12 m12 l4" style="padding: 1px;">
+      <a href="/<%= blogs[0]._id %>">
+      <div class="containerss">
+          <img class="imgss" src="<%= blogs[0].image %>" style="width:100%;">
+      <div class="text-blockss">
+          <h4 class="h4Header"><%= blogs[0].title %></h4>
+      </div>
+    </div>
+    </a>
+  </div>
+
+  <div class="col s12 m12 l4" style="padding: 1px;">
+     <a href="/<%= blogs[1]._id %>">
+      <div class="containerss">
+          <img class="imgss" src="<%= blogs[1].image %>" style="width:100%;">
+      <div class="text-blockss">
+          <h4 class="h4Header"><%= blogs[1].title %></h4>
+      </div>
+    </div>
+    </a>
+  </div>
+
+  <div class="col s12 m12 l4" style="padding: 1px;">
+    <a href="/<%= blogs[2]._id %>">
+      <div class="containerss">
+          <img class="imgss" src="<%= blogs[2].image %>" style="width:100%;">
+      <div class="text-blockss">
+          <h4 class="h4Header"><%= blogs[2].title %></h4>
+      </div>
+    </div>
+    </a>
+  </div>
+   
+
+</div>
+
+<div class="row">
+
+  <div class="col s12 m12 l8" style="padding: 1px;">
+  <a href="/<%= blogs[3]._id %>">
+      <div class="containerss">
+          <img class="imgss" src="<%= blogs[3].image %>" style="width:100%;">
+      <div class="text-blockss">
+          <h4><%= blogs[3].title %></h4>
+      </div>
+    </div>
+  </a>
+  </div>
+
+  <div class="col s12 m12 l4" style="padding: 1px;">
+  <a href="/<%= blogs[4]._id %>">
+      <div class="containerss">
+          <img class="imgss" src="<%= blogs[4].image %>" style="width:100%;">
+      <div class="text-blockss">
+          <h4><%= blogs[4].title %></h4>
+      </div>
+    </div>
+    </a>
+  </div>
+ 
+</div>
+
+
+
+<% blogs.forEach(function(blog){ %>
+
+    <div class="col s12">
+    <div class="card horizontal">
+      <div class="card-image">
+        <img src="<%= blog.image %>">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+        <h4><%= blog.title %></h4>
+        <p><%- blog.body.substring(0, 100)%></p>
+        <br>
+        <p><%= blog.created.toDateString() %></p>
+        </div>
+        <div class="card-action">
+          <a href="/<%= blog._id %>">Read the full article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% }); %>
+
+<% } else { %>
+<% blogs.forEach(function(blog){ %>
+
+    <div class="col s12">
+    <div class="card horizontal">
+      <div class="card-image">
+        <img src="<%= blog.image %>" style="height: 200px; width: 200px;">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+        <h4><%= blog.title %></h4>
+          <p><%- blog.body.substring(0, 100)%></p>
+        </div>
+        <div class="card-action">
+          <a href="/<%= blog._id %>">Read the full article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% }); %>
+<% }%>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<% include ./partials/footer%>

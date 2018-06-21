@@ -1,0 +1,26 @@
+<% include ./partials/header%>
+<div class="main-container">
+<div class="container">
+
+<form action="/" method="POST">
+        <div>
+            <label>Title</label>
+            <input type="text" name="blog[title]" placeholder="title">
+        </div>
+        
+        <div>
+            <label>Image</label>
+            <input type="text" name="blog[image]" placeholder="image">
+        </div>
+        
+        <div>
+            <label>Blog Content</label>
+            <textarea required name="blog[body]"></textarea>
+        </div>
+        
+        <input  type="submit">
+    </form>
+
+</div>
+</div>
+<% include ./partials/footer%>

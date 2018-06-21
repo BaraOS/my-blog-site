@@ -1,0 +1,60 @@
+<% include ./partials/header%>
+
+<link rel="stylesheet" type="text/css" href="../stylesheets/show.css" />
+<div class="main-container">
+<div class="container">
+
+<div>
+    <div>
+    <h3><%= blog.title %></h3>
+    </div>
+    <div>
+        <div>
+            <img class="showimg" src="<%= blog.image %>">
+            <div>
+                <span><%= blog.created.toDateString() %></span>
+            </div>
+            <div class="showtext">
+                <p><%- blog.body %></p>
+            </div>
+
+            <h4>Comments: </h4>
+            <div class="comments">
+            <% blog.comments.forEach(function(comment){ %>
+            <div class="content"> 
+            <h5><%= comment.author %></h5>
+            <p><%= comment.text %></p>
+            </div>
+            <% }); %>
+            
+            </div>
+          <a href="/<%=blog._id%>/comment/new">Add a comment</a>
+         <% if(!currentUser){ %>
+        
+        
+
+        <% } else if(currentUser.isAdmin == true){ %>
+         
+            <br>
+            <form action="/<%= blog._id %>?_method=DELETE" method="POST">
+            <a class="waves-effect waves-light btn-large" href="/<%= blog._id %>/edit">Edit</a>
+                <button class="waves-effect waves-light btn-large deleteButton" >Delete</button>
+            </form>
+        
+
+      <% } else { %>
+        
+
+      <% } %>
+          
+        </div>
+    </div>
+
+    
+
+    
+</div>
+
+</div>
+</div>
+<% include ./partials/footer%>
