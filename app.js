@@ -203,6 +203,9 @@ app.post("/:id/comment", isLoggedIn, function (req, res){
                 if(err){
                     console.log(err);
                 } else {
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    comment.save();
                     blog.comments.push(comment);
                     blog.save();
                     res.redirect("/" + blog._id);

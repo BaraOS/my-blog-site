@@ -22,7 +22,7 @@
             <div class="comments">
             <% blog.comments.forEach(function(comment){ %>
             <div class="content"> 
-            <h5><%= comment.author %></h5>
+            <h5><%= comment.author.username %></h5>
             <p><%= comment.text %></p>
             </div>
             <% }); %>
