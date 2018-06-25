@@ -16,3 +16,4 @@ or through app.js file before running the server.
 * Passport local
 * Materializecss 
 
+![Alt text](https://github.com/BaraOS/my-blog-site/blob/master/screenshots/screenshot.png?raw=true)
