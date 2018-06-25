@@ -1,13 +1,13 @@
 var express = require("express");
 var passport = require("passport");
 var app = express();
-var User = require("./models/user");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var mongoose = require("mongoose");
 var LocalStrategy = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
 var expressSanitzer = require("express-sanitizer");
+var User = require("./models/user");
 var Comment = require("./models/comment");
 
 mongoose.connect("mongodb://localhost/my_blog");
@@ -46,6 +46,14 @@ var blogSchema = new mongoose.Schema({
     image: String,
     body: String,
     created: {type: Date, default: Date.now},
+    author: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+    },
+    //author: String,
     comments: [
          {
             type: mongoose.Schema.Types.ObjectId,
@@ -120,7 +128,15 @@ app.get("/new", isAdmin, function(req, res){
 app.post("/", isAdmin, function(req, res){
     //create blog
     //req.body.blog.body = req.sanitize(req.body.blog.body);
-    Blog.create(req.body.blog, function(err, newBlog){
+    var title = req.body.title;
+    var image = req.body.image;
+    var body = req.body.body;
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    }
+    var newBlogPost = {title: title, image: image, body: body, author: author};
+    Blog.create(newBlogPost, function(err, newBlog){
         if(err){
             res.render("new");
         } else{
@@ -234,4 +250,4 @@ function isAdmin(req, res, next){
     }
 }
 
-app.listen(3000, () => console.log('Movie Search app listening on port 3000!'));
+app.listen(3000, () => console.log('MyBlog Site is now running on port 3000!'));
