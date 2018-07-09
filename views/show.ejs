@@ -34,7 +34,7 @@
         
         
 
-        <% } else if(currentUser.isAdmin == true){ %>
+        <% } else if(currentUser.isAdmin && (blog.author.id.equals(currentUser._id))){ %>
          
             <br>
             <form action="/<%= blog._id %>?_method=DELETE" method="POST">

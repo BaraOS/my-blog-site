@@ -159,7 +159,7 @@ app.get("/:id", function(req, res){
 });
 
 //EDIT ROUTE
-app.get("/:id/edit", isAdmin, function(req, res){
+app.get("/:id/edit", isAdmin, isAuthor, function(req, res){
   Blog.findById(req.params.id, function(err, foundBlog){
      if(err){
          res.redirect("/");
@@ -170,7 +170,7 @@ app.get("/:id/edit", isAdmin, function(req, res){
 });
 
 //UPDATE ROUTE
-app.put("/:id", isAdmin, function(req, res){
+app.put("/:id", isAdmin, isAuthor, function(req, res){
     //req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updateBlog){
         if(err){
@@ -182,7 +182,7 @@ app.put("/:id", isAdmin, function(req, res){
 });
 
 //DELETE ROUTE
-app.delete("/:id", isAdmin, function(req, res){
+app.delete("/:id", isAdmin, isAuthor, function(req, res){
     //destroy blog
     Blog.findByIdAndRemove(req.params.id, function(err){
         if(err){
@@ -239,6 +239,23 @@ function isLoggedIn(req, res, next){
     } else{
         res.redirect("/user");
     }
+}
+
+function isAuthor(req, res, next){
+
+if(req.isAuthenticated()){
+    Blog.findById(req.params.id, function(err, foundBlog){
+        if(err){
+            res.redirect("back");
+        } else{
+            if(foundBlog.author.id.equals(req.user._id)){
+                next();
+            } else {
+                res.redirect("back");
+            }
+        }
+    });
+ }
 }
 
 function isAdmin(req, res, next){
